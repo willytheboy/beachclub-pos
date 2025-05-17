@@ -22,7 +22,6 @@ app/
   navigation/            # Tab + stack navigation
   common/                # Shared hooks, theme, utils
   features/              # Feature folders (menu, order, ...)
-api/                     # FastAPI edge (printing proxy)
+api/                     # Planned FastAPI edge (printing proxy, not yet implemented)
 ```
-
 See the Phase 1 MVP brief for full module breakdown.
