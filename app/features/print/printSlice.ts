@@ -9,11 +9,11 @@ const initialState: PrintState = {
   ready: false,
 };
 
-const printSlice = createSlice({
+const printSlice = createSlice<PrintState>({
   name: 'print',
   initialState,
   reducers: {
-    setReady(state, action: PayloadAction<boolean>>) {
+    setReady(state, action: PayloadAction<boolean>) {
       state.ready = action.payload;
     },
   },

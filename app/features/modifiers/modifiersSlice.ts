@@ -9,11 +9,11 @@ const initialState: ModifiersState = {
   ready: false,
 };
 
-const modifiersSlice = createSlice({
+const modifiersSlice = createSlice<ModifiersState>({
   name: 'modifiers',
   initialState,
   reducers: {
-    setReady(state, action: PayloadAction<boolean>>) {
+    setReady(state, action: PayloadAction<boolean>) {
       state.ready = action.payload;
     },
   },

@@ -9,11 +9,11 @@ const initialState: InvoiceState = {
   ready: false,
 };
 
-const invoiceSlice = createSlice({
+const invoiceSlice = createSlice<InvoiceState>({
   name: 'invoice',
   initialState,
   reducers: {
-    setReady(state, action: PayloadAction<boolean>>) {
+    setReady(state, action: PayloadAction<boolean>) {
       state.ready = action.payload;
     },
   },
