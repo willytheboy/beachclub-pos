@@ -9,11 +9,11 @@ const initialState: MenuState = {
   ready: false,
 };
 
-const menuSlice = createSlice({
+const menuSlice = createSlice<MenuState>({
   name: 'menu',
   initialState,
   reducers: {
-    setReady(state, action: PayloadAction<boolean>>) {
+    setReady(state, action: PayloadAction<boolean>) {
       state.ready = action.payload;
     },
   },

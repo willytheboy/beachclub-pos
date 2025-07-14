@@ -9,11 +9,11 @@ const initialState: OfflinequeueState = {
   ready: false,
 };
 
-const offlineQueueSlice = createSlice({
+const offlineQueueSlice = createSlice<OfflinequeueState>({
   name: 'offlineQueue',
   initialState,
   reducers: {
-    setReady(state, action: PayloadAction<boolean>>) {
+    setReady(state, action: PayloadAction<boolean>) {
       state.ready = action.payload;
     },
   },

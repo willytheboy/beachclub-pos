@@ -9,11 +9,11 @@ const initialState: OrderState = {
   ready: false,
 };
 
-const orderSlice = createSlice({
+const orderSlice = createSlice<OrderState>({
   name: 'order',
   initialState,
   reducers: {
-    setReady(state, action: PayloadAction<boolean>>) {
+    setReady(state, action: PayloadAction<boolean>) {
       state.ready = action.payload;
     },
   },
