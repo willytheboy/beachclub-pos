@@ -13,7 +13,7 @@ const statusSlice = createSlice({
   name: 'status',
   initialState,
   reducers: {
-    setReady(state, action: PayloadAction<boolean>>) {
+    setReady(state: StatusState, action: PayloadAction<boolean>) {
       state.ready = action.payload;
     },
   },

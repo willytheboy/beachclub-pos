@@ -13,7 +13,7 @@ const modifiersSlice = createSlice({
   name: 'modifiers',
   initialState,
   reducers: {
-    setReady(state, action: PayloadAction<boolean>>) {
+    setReady(state: ModifiersState, action: PayloadAction<boolean>) {
       state.ready = action.payload;
     },
   },

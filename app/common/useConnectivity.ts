@@ -1,14 +1,14 @@
 
 import { useEffect, useState } from 'react';
-import NetInfo, { NetInfoState } from '@react-native-community/netinfo';
+import NetInfo from '@react-native-community/netinfo';
 
 export type Connectivity = 'online' | 'offline';
 
 export function useConnectivity(): Connectivity {
-  const [status, setStatus] = useState<Connectivity>('online');
+  const [status, setStatus] = useState('online' as Connectivity);
 
   useEffect(() => {
-    const sub = NetInfo.addEventListener((state: NetInfoState) => {
+    const sub = NetInfo.addEventListener((state: any) => {
       setStatus(state.isConnected ? 'online' : 'offline');
     });
     return () => sub();
