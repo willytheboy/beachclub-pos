@@ -25,3 +25,7 @@ app/
 api/                     # Planned FastAPI edge (printing proxy, not yet implemented)
 ```
 See the Phase 1 MVP brief for full module breakdown.
+
+## Web Canvas App
+
+A minimal canvas designer is provided in `web-canvas-app/`. Open `index.html` in a browser to try it.
