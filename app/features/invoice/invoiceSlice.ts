@@ -13,7 +13,7 @@ const invoiceSlice = createSlice({
   name: 'invoice',
   initialState,
   reducers: {
-    setReady(state, action: PayloadAction<boolean>>) {
+    setReady(state: InvoiceState, action: PayloadAction<boolean>) {
       state.ready = action.payload;
     },
   },

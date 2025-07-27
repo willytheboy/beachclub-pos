@@ -13,7 +13,7 @@ const orderSlice = createSlice({
   name: 'order',
   initialState,
   reducers: {
-    setReady(state, action: PayloadAction<boolean>>) {
+    setReady(state: OrderState, action: PayloadAction<boolean>) {
       state.ready = action.payload;
     },
   },

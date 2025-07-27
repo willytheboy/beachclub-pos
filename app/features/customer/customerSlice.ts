@@ -13,7 +13,7 @@ const customerSlice = createSlice({
   name: 'customer',
   initialState,
   reducers: {
-    setReady(state, action: PayloadAction<boolean>>) {
+    setReady(state: CustomerState, action: PayloadAction<boolean>) {
       state.ready = action.payload;
     },
   },

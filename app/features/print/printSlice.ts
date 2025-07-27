@@ -13,7 +13,7 @@ const printSlice = createSlice({
   name: 'print',
   initialState,
   reducers: {
-    setReady(state, action: PayloadAction<boolean>>) {
+    setReady(state: PrintState, action: PayloadAction<boolean>) {
       state.ready = action.payload;
     },
   },

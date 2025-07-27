@@ -13,7 +13,7 @@ const menuSlice = createSlice({
   name: 'menu',
   initialState,
   reducers: {
-    setReady(state, action: PayloadAction<boolean>>) {
+    setReady(state: MenuState, action: PayloadAction<boolean>) {
       state.ready = action.payload;
     },
   },
