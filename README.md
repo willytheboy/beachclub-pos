@@ -25,3 +25,8 @@ app/
 api/                     # Planned FastAPI edge (printing proxy, not yet implemented)
 ```
 See the Phase 1 MVP brief for full module breakdown.
+
+## Image Prep Web App
+
+A simple React + Tailwind project lives in `image-prep-app/`. It helps create 9:16 composites with optional heading and banner text. See its README for instructions.
+
