@@ -1,0 +1,101 @@
+openapi: 3.1.0
+info:
+  title: BeachClub POS API
+  version: 0.1.0
+paths:
+  /tickets:
+    post:
+      summary: Issue ticket
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TicketDTO'
+      responses:
+        '201': { description: Created }
+  /vouchers/redeem:
+    post:
+      summary: Redeem voucher
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VoucherRedeemDTO'
+      responses:
+        '200': { description: Redeemed }
+  /cash/payout:
+    post:
+      summary: Petty cash payout
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PettyCashPayoutDTO'
+      responses:
+        '200': { description: Payout logged }
+  /notify:
+    post:
+      summary: Send WhatsApp message
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WhatsAppSendDTO'
+      responses:
+        '202': { description: Queued }
+  /eod/close:
+    post:
+      summary: Close end of day
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EndOfDayCloseDTO'
+      responses:
+        '200': { description: Closed }
+components:
+  schemas:
+    TicketDTO:
+      type: object
+      properties:
+        id: { type: string }
+        skuId: { type: string }
+        price: { type: number }
+        vatIncluded: { type: boolean }
+        clientId: { type: string }
+      required: [id, skuId, price, vatIncluded]
+    VoucherRedeemDTO:
+      type: object
+      properties:
+        code: { type: string }
+        clientId: { type: string }
+      required: [code]
+    PettyCashPayoutDTO:
+      type: object
+      properties:
+        amount: { type: number }
+        reason: { type: string }
+        approvedBy: { type: string }
+      required: [amount, reason, approvedBy]
+    WhatsAppSendDTO:
+      type: object
+      properties:
+        to: { type: string }
+        templateId: { type: string }
+        variables:
+          type: object
+          additionalProperties:
+            type: string
+        attachmentUrl: { type: string }
+      required: [to, templateId, variables]
+    EndOfDayCloseDTO:
+      type: object
+      properties:
+        shiftId: { type: string }
+        countedCash: { type: number }
+      required: [shiftId, countedCash]
