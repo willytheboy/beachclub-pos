@@ -7,6 +7,7 @@ export const sunlightPalette = {
   background: '#f2f2f2',
   card: '#ffffff',
   border: '#cccccc',
+  notification: '#ff3b30',
 };
 
 export const normalPalette = {
@@ -15,6 +16,7 @@ export const normalPalette = {
   background: '#ffffff',
   card: '#ffffff',
   border: '#cccccc',
+  notification: '#ff3b30',
 };
 
 export const AppTheme = {
