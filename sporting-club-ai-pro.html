@@ -9,11 +9,6 @@
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.6/purify.min.js"></script>
 
-    <!-- Firebase SDKs -->
-    <script src="https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js" type="module"></script>
-    <script src="https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js" type="module"></script>
-    <script src="https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js" type="module"></script>
-
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=Tajawal:wght@400;500;700;800;900&display=swap');
 
@@ -213,8 +208,8 @@
         import { getFirestore, doc, setDoc, getDoc, collection, onSnapshot } from 'https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js';
 
         // --- Core Configuration ---
-        const apiKey = "";
-        const firebaseConfig = JSON.parse(__firebase_config);
+        const apiKey = typeof __api_key !== 'undefined' ? __api_key : "";
+        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const db = getFirestore(app);
@@ -318,10 +313,16 @@
                 const cleaned = isAI ? scrubAIResponse(text) : text;
                 const sanitized = DOMPurify.sanitize(marked.parse(cleaned));
                 html = `<div class="prose prose-sm prose-invert max-w-none">${sanitized}</div>`;
-                if (isAI) html += `<button onclick="window.speak('${text.replace(/`/g, '\\`').replace(/\$/g, '\\$')}')" class="mt-2 text-[10px] font-black text-slate-500 hover:text-white uppercase">✨ Listen</button>`;
+                if (isAI) {
+                    html += `<button class="listen-btn mt-2 text-[10px] font-black text-slate-500 hover:text-white uppercase">✨ Listen</button>`;
+                }
             }
 
             div.innerHTML = `<div class="max-w-[88%] rounded-[1.8rem] p-4 text-[14px] shadow-2xl ${isAI ? 'bg-slate-800/95 border border-white/5 text-left' : 'bg-blue-600 text-white text-right'}">${html}</div>`;
+            if (isAI && !isImage) {
+                const listenBtn = div.querySelector('.listen-btn');
+                if (listenBtn) listenBtn.addEventListener('click', () => window.speak(text));
+            }
             els.chat.appendChild(div);
             els.chat.scrollTop = els.chat.scrollHeight;
         }
@@ -483,6 +484,42 @@
         els.input.onkeydown = (e) => { if(e.key === 'Enter' && !e.shiftKey){ e.preventDefault(); chat(); } };
         els.btnGate.onclick = () => { els.modalAdmin.classList.remove('hidden'); setTimeout(() => els.modalAdmin.classList.replace('opacity-0', 'opacity-100'), 10); };
         document.getElementById('btn-close-admin').onclick = () => { els.modalAdmin.classList.replace('opacity-100', 'opacity-0'); setTimeout(() => els.modalAdmin.classList.add('hidden'), 300); };
+
+        document.getElementById('btn-export').onclick = () => {
+            const data = { instructions: localState.instructions, qa: localState.qa };
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = 'sporting-club-logic.json';
+            a.click();
+            setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+            notify("LOGIC EXPORTED");
+        };
+
+        document.getElementById('btn-import-trigger').onclick = () => document.getElementById('input-import').click();
+        document.getElementById('input-import').onchange = (e) => {
+            const f = e.target.files[0];
+            e.target.value = '';
+            if (!f) return;
+            const r = new FileReader();
+            r.onload = (ev) => {
+                try {
+                    const data = JSON.parse(ev.target.result);
+                    if (Array.isArray(data.instructions) && data.instructions.every(t => typeof t === 'string')) {
+                        localState.instructions = data.instructions;
+                    }
+                    if (Array.isArray(data.qa) && data.qa.every(it => it && typeof it.q === 'string' && typeof it.a === 'string')) {
+                        localState.qa = data.qa;
+                    }
+                    syncToCloud();
+                    renderAdminUI();
+                    notify("LOGIC IMPORTED");
+                } catch (err) { notify("INVALID FILE"); }
+            };
+            r.readAsText(f);
+        };
+
+        document.getElementById('btn-lock').onclick = () => { els.modalAdmin.classList.replace('opacity-100', 'opacity-0'); setTimeout(() => els.modalAdmin.classList.add('hidden'), 300); };
 
         init();
     </script>
