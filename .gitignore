@@ -4,3 +4,5 @@ node_modules
 .DS_Store
 .env
 build
+cloudflared.deb
+*.deb
