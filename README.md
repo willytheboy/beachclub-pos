@@ -1,27 +1,44 @@
+# ROOTS — Phase 1 Scaffold (Expo + React Native + TypeScript)
 
-# Beach Club POS – Phase 1 Scaffold
+Premium, mobile-first farm-to-table companion app scaffold for Phase 1.
 
-Generated on 2025-04-24.
+## What is included
 
-This is the starting skeleton for the React Native (Expo) PDA application.
+- Five-tab app shell: Home, Library, Recipes, Shop, Profile
+- Typed bottom-tab navigation (`RootTabParamList`) with in-tab detail flows
+- Reusable UI primitives: Card, Badge, Chip, Section
+- Centralized design tokens (`src/theme/tokens.ts`)
+- Seed-data-driven local repositories (`mockCatalogRepository`, `mockUserStateRepository`)
+- Local persistence for preferences, saved recipes, and cart via `expo-secure-store`
+- Feature-first folder structure with typed domain models
+- TODO markers where Supabase repositories should plug in
 
-## Getting started
+## Folder structure
+
+- `src/app/` app bootstrap, state, navigation
+- `src/components/` shared UI primitives
+- `src/features/` screen implementations by feature
+- `src/data/` seed data + repository abstractions
+- `src/lib/` low-level utilities (storage)
+- `src/theme/` design tokens + navigation theme
+- `src/types/` domain models
+
+## Run locally
 
 ```bash
-git clone <YOUR-REPO-URL>
-cd beachclub-pos
+npm install
+npm run start
+```
+
+or
+
+```bash
 yarn install
-expo start --dev-client
+yarn start
 ```
 
-## Structure
+## Supabase wiring notes
 
-```
-app/
-  App.tsx                # Root component
-  navigation/            # Tab + stack navigation
-  common/                # Shared hooks, theme, utils
-  features/              # Feature folders (menu, order, ...)
-api/                     # Planned FastAPI edge (printing proxy, not yet implemented)
-```
-See the Phase 1 MVP brief for full module breakdown.
+1. Replace `mockCatalogRepository` with `supabaseCatalogRepository` in `src/data/repositories/mockRepositories.ts`.
+2. Replace `mockUserStateRepository` with `supabaseUserStateRepository` once auth/user tables are available.
+3. Keep screen components unchanged by continuing to consume repository interfaces from `src/data/repositories/types.ts`.

@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "allowJs": false,
-    "jsx": "react",
+    "jsx": "react-native",
     "target": "esnext",
     "moduleResolution": "node",
     "strict": true,
@@ -9,7 +9,7 @@
     "baseUrl": ".",
     "paths": {
       "@/*": [
-        "app/*"
+        "src/*"
       ]
     }
   },

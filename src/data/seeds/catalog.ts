@@ -1,0 +1,126 @@
+import { JournalEntry, OrderHistoryItem, Product, Recipe, RootsCategory } from '@/types/models';
+
+export const categories: RootsCategory[] = [
+  { id: 'leafy', name: 'Leafy Greens', emoji: '🥬' },
+  { id: 'roots', name: 'Roots', emoji: '🥕' },
+  { id: 'herbs', name: 'Herbs', emoji: '🌿' },
+  { id: 'fruit', name: 'Fruit', emoji: '🍅' },
+];
+
+export const products: Product[] = [
+  {
+    id: 'p1',
+    name: 'Rainbow Chard',
+    categoryId: 'leafy',
+    shortDescription: 'Tender colorful stems with mineral-rich leaves from our coastal plots.',
+    flavorNotes: ['Earthy', 'Mineral', 'Slightly sweet stem'],
+    prepNotes: ['Separate stems from leaves', 'Sauté stems first for 2 minutes'],
+    storageNotes: 'Wrap in a dry towel and refrigerate for up to 5 days.',
+    pairings: ['Garlic confit', 'White beans', 'Lemon zest'],
+    nutritionHighlights: ['Vitamin K', 'Magnesium', 'Fiber'],
+    seasonalityNote: 'Peak from late spring to early fall.',
+    linkedRecipeIds: ['r1'],
+    imageUrl: 'https://images.unsplash.com/photo-1576045057995-568f588f82fb',
+    inStock: true,
+    price: 5.5,
+  },
+  {
+    id: 'p2',
+    name: 'Heirloom Carrots',
+    categoryId: 'roots',
+    shortDescription: 'Mixed-color carrots harvested at sweetness peak.',
+    flavorNotes: ['Sweet', 'Floral', 'Crunchy'],
+    prepNotes: ['Roast whole for best texture', 'Save tops for pesto'],
+    storageNotes: 'Store unwashed in perforated bag for 10 days.',
+    pairings: ['Tahini', 'Cumin', 'Orange'],
+    nutritionHighlights: ['Beta-carotene', 'Potassium'],
+    seasonalityNote: 'Best flavor during cool months.',
+    linkedRecipeIds: ['r2'],
+    imageUrl: 'https://images.unsplash.com/photo-1598170845058-32b9d6a5da37',
+    inStock: true,
+    price: 4.25,
+  },
+  {
+    id: 'p3',
+    name: 'Genovese Basil',
+    categoryId: 'herbs',
+    shortDescription: 'Fragrant bunches grown in low-tunnel beds.',
+    flavorNotes: ['Peppery', 'Sweet anise'],
+    prepNotes: ['Bruise lightly before adding', 'Add at the end for aroma'],
+    storageNotes: 'Keep stems in water at room temp, away from sun.',
+    pairings: ['Tomato', 'Mozzarella', 'Peach'],
+    nutritionHighlights: ['Vitamin A', 'Antioxidants'],
+    seasonalityNote: 'Thrives in warm midsummer windows.',
+    linkedRecipeIds: ['r3'],
+    imageUrl: 'https://images.unsplash.com/photo-1618375569909-3c8616cf7733',
+    inStock: false,
+    price: 3.95,
+  },
+];
+
+export const recipes: Recipe[] = [
+  {
+    id: 'r1',
+    title: 'Warm Chard & White Bean Skillet',
+    summary: 'A quick weeknight skillet with garlic and lemon.',
+    ingredients: ['1 bunch rainbow chard', '1 can white beans', '2 cloves garlic', 'Olive oil', 'Lemon'],
+    steps: ['Slice stems and leaves separately.', 'Sauté stems with garlic.', 'Add beans and leaves, cook until tender.', 'Finish with lemon.'],
+    prepMinutes: 10,
+    cookMinutes: 12,
+    servings: 2,
+    difficulty: 'Easy',
+    linkedProductIds: ['p1'],
+    dietaryTags: ['Vegetarian', 'Gluten-Free'],
+    imageUrl: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd',
+  },
+  {
+    id: 'r2',
+    title: 'Roasted Carrots with Citrus Tahini',
+    summary: 'Sweet roasted carrots with bright tahini drizzle.',
+    ingredients: ['2 bunches heirloom carrots', 'Tahini', 'Orange juice', 'Cumin', 'Salt'],
+    steps: ['Roast carrots at 425°F for 25 min.', 'Whisk tahini with citrus and cumin.', 'Plate and drizzle.'],
+    prepMinutes: 8,
+    cookMinutes: 25,
+    servings: 4,
+    difficulty: 'Easy',
+    linkedProductIds: ['p2'],
+    dietaryTags: ['Vegan'],
+    imageUrl: 'https://images.unsplash.com/photo-1547592166-23ac45744acd',
+  },
+  {
+    id: 'r3',
+    title: 'Summer Basil Grain Bowl',
+    summary: 'Herby grains, ripe tomatoes, and creamy dressing.',
+    ingredients: ['Cooked farro', 'Basil', 'Tomatoes', 'Yogurt', 'Lemon'],
+    steps: ['Blend basil with yogurt and lemon.', 'Toss farro and tomatoes.', 'Top with dressing.'],
+    prepMinutes: 15,
+    cookMinutes: 0,
+    servings: 2,
+    difficulty: 'Medium',
+    linkedProductIds: ['p3'],
+    dietaryTags: ['Vegetarian'],
+    imageUrl: 'https://images.unsplash.com/photo-1511690743698-d9d85f2fbf38',
+  },
+];
+
+export const journal: JournalEntry[] = [
+  {
+    id: 'j1',
+    title: 'Meet the North Field Crew',
+    excerpt: 'How our growers rotate beds for stronger soil and sweeter roots.',
+    imageUrl: 'https://images.unsplash.com/photo-1464226184884-fa280b87c399',
+    publishedAt: '2026-03-10',
+  },
+  {
+    id: 'j2',
+    title: 'Why Shoulder Season Greens Shine',
+    excerpt: 'Cool nights concentrate sugars and build crunch.',
+    imageUrl: 'https://images.unsplash.com/photo-1471193945509-9ad0617afabf',
+    publishedAt: '2026-04-01',
+  },
+];
+
+export const orderHistory: OrderHistoryItem[] = [
+  { id: 'o1', placedAt: '2026-04-02', total: 28.75, itemNames: ['Rainbow Chard', 'Heirloom Carrots'] },
+  { id: 'o2', placedAt: '2026-04-12', total: 16.5, itemNames: ['Genovese Basil', 'Heirloom Carrots'] },
+];
